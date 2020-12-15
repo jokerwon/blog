@@ -1,9 +1,14 @@
 ---
 title: Sass
+tag: [Frontend, CSS, Sass]
 ---
 
 
 ## 一、快速入门
+
+Sass 是一款强化 CSS 的辅助工具，它在 CSS 语法的基础上增加了变量 (variables)、嵌套 (nested rules)、混合 (mixins)、导入 (inline imports) 等高级功能，这些拓展令 CSS 更加强大与优雅。使用 Sass 以及 Sass 的样式库（如 Compass）有助于更好地组织管理样式文件，以及更高效地开发项目。
+
+<!-- more -->
 
 ### 1. 变量
 
@@ -92,8 +97,6 @@ article a:hover { color: red }
    }
    ~~~
 
-   
-
 #### 2.4 属性嵌套
 
 ~~~scss
@@ -125,8 +128,6 @@ nav {
   border-right: 0px;
 }
 ~~~
-
-
 
 ### 3. 导入 SASS 文件
 
@@ -191,10 +192,8 @@ aside {
 在下列三种情况下会生成原生的`CSS@import`，尽管这会造成浏览器解析`css`时的额外下载：
 
 - 被导入文件的名字以`.css`结尾；
-- 被导入文件的名字是一个URL地址（比如http://www.sass.hk/css/css.css），由此可用谷歌字体API提供的相应服务；
+- 被导入文件的名字是一个URL地址（比如<http://www.sass.hk/css/css.css），由此可用谷歌字体API>提供的相应服务；
 - 被导入文件的名字是`CSS`的url()值。
-
-
 
 ### 4. 静默注释
 
@@ -217,8 +216,6 @@ body {
   padding: 1; /* 这块注释内容也不会出现在生成的css中 */ 0;
 }
 ```
-
-
 
 ### 5. 混合器
 
@@ -394,8 +391,6 @@ $values: #ff0000, #00ff00, #0000ff;
     background-image: url(/logo.gif)
 ```
 
-
-
 ### 6. 选择器继承
 
 #### 6.1 基本用法
@@ -440,6 +435,4 @@ h1.error { //应用到hl.seriousError
 - 跟混合器相比，继承生成的`css`代码相对更少。因为继承仅仅是重复选择器，而不会重复属性，所以使用继承往往比混合器生成的`css`体积更小。如果你非常关心你站点的速度，请牢记这一点。
 - 继承遵从`css`层叠的规则。当两个不同的`css`规则应用到同一个`html`元素上时，并且这两个不同的`css`规则对同一属性的修饰存在不同的值，`css`层叠规则会决定应用哪个样式。相当直观：通常权重更高的选择器胜出，如果权重相同，定义在后边的规则胜出。
 
-
-
-*此章节是对 https://www.sass.hk/guide/ 的精简概括，目的在于帮助自己快速使用 SASS。*
+*此章节是对 <https://www.sass.hk/guide/> 的精简概括，目的在于帮助自己快速使用 SASS。*

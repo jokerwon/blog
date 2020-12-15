@@ -1,30 +1,33 @@
 ---
 title: Maven
+tag: [Backend, Java, Maven]
 ---
 
 ### 一、 环境的搭建
 
+Maven 翻译为"专家"、"内行"，是 Apache 下的一个纯 Java 开发的开源项目。基于项目对象模型（缩写：POM）概念，Maven利用一个中央信息片断能管理一个项目的构建、报告和文档等步骤。Maven 是一个项目管理工具，可以对 Java 项目进行构建、依赖管理。Maven 也可被用于构建和管理各种项目，例如 C#，Ruby，Scala 和其他语言编写的项目。Maven 曾是 Jakarta 项目的子项目，现为由 Apache 软件基金会主持的独立 Apache 项目。
+
+<!-- more -->
+
 #### 1.1  检查 JDK 的安装
 
-​	*Maven 可运行在 JDK 1.4 及以上的版本。*
+​ *Maven 可运行在 JDK 1.4 及以上的版本。*
 
-​	Windows 环境下，打开 cmd 命令窗口，键入
+​ Windows 环境下，打开 cmd 命令窗口，键入
 
-​	`java -version`
+​ `java -version`
 
-​	结果如下
+​ 结果如下
 
 ![1552449175(1)](C:\Users\ZNV\Desktop\Notes\images\1552449175(1).jpg)
 
-
-
 #### 1. 2  下载Maven
 
- -  从[Maven官网](http://maven.apache.org/download.cgi)下载压缩包，然后解压
+- 从[Maven官网](http://maven.apache.org/download.cgi)下载压缩包，然后解压
 
 ![download](C:\Users\ZNV\Desktop\Notes\images\download.png)
 
- - 添加系统环境变量
+- 添加系统环境变量
 
 ![system_path0](C:\Users\ZNV\Desktop\Notes\images\system_path0.png)
 
@@ -41,8 +44,6 @@ title: Maven
   ![mvn-v](C:\Users\ZNV\Desktop\Notes\images\mvn-v.png)
 
 - 至此，完成对 Maven 的环境配置。
-
-
 
 ### 二、 使用入门
 
@@ -79,15 +80,13 @@ project_name
 | `NOTICE.txt`         | Notices and attributions required by libraries that the project depends on |
 | `README.txt`         | Project's readme                                             |
 
-
-
 #### 2.2  编写 POM
 
-​	POM（Project  Object  Model，项目对象模型）定义了项目的基本信息，用于描述项目如何构建，声明项目依赖等。pom.xml 文件是 Maven 项目的核心。
+​ POM（Project  Object  Model，项目对象模型）定义了项目的基本信息，用于描述项目如何构建，声明项目依赖等。pom.xml 文件是 Maven 项目的核心。
 
 ~~~xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 		 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0    http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <!-- 当前pom的版本,对于 Maven 2 及 Maven 3 来说，它只能是 4.0.0 -->
     <modelVersion>4.0.0</modelVersion>
 
@@ -212,7 +211,7 @@ project_name
     
     <!-- 指定父模块 -->
     <parent>
-    	<groupId></groupId>
+     <groupId></groupId>
         <artifactId></artifactId>
         <version></version>
         <!-- relativePath: 可选，父项目的pom.xml文件的相对路径。默认值是 ../pom.xml 。
@@ -231,9 +230,6 @@ project_name
 </project>
 ~~~
 
-
-
 **点[这里](https://www.cnblogs.com/hafiz/p/5360195.html)，参阅更详细的pom.xml配置**。
 
 [**官方文档**](http://maven.apache.org/guides/introduction/introduction-to-the-pom.html)
-

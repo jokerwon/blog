@@ -1,8 +1,13 @@
 ---
-title: UML
+title: Vue
+tag: [Frontend, JavaScript, Vue]
 ---
 
 ### 一、 入门
+
+Vue.js（读音 /vjuː/, 类似于 view） 是一套构建用户界面的渐进式框架。Vue 只关注视图层， 采用自底向上增量开发的设计。Vue 的目标是通过尽可能简单的 API 实现响应的数据绑定和组合的视图组件。
+
+<!-- more -->
 
 #### 1.1  常用指令
 
@@ -14,7 +19,7 @@ title: UML
 
   ~~~html
   [v-cloak]{
-  	display: none;
+   display: none;
   }
   
   <div id='app' v-cloak>
@@ -30,8 +35,6 @@ title: UML
       }
   })
   ~~~
-
-  
 
 - v-text
 
@@ -75,13 +78,13 @@ title: UML
  *  + el: 指令所绑定的元素，可以用来直接操作 DOM
  *  + binding: 一个对象，包含以下属性
  *      - name: 指令名，不包括 v- 前缀
- *		- value: 指令的绑定值，例如 v-my-directive="1+1",value值是 2
- *		- expression： 绑定值的字符串形式，例如上例中则为 "1+1"
- *		- oldValue: 指令绑定的前一个值，仅在 update 和 componentUpdated 钩子中可用
- * 		- arg： 传给指令的参数。例如 v-my-directiv:foo, arg 的值为 "foo"
- *		- modifiers: 一个包含修饰符的对象。例如 v-my-directiv.foo.bar ,则其值为 { foo: true, bar: true }
- *	+ vnode: Vue 编译生成的虚拟节点
- *	+ oldVnode: 上一个虚拟节点，仅在 update 和 componentUpdated 钩子中可用
+ *  - value: 指令的绑定值，例如 v-my-directive="1+1",value值是 2
+ *  - expression： 绑定值的字符串形式，例如上例中则为 "1+1"
+ *  - oldValue: 指令绑定的前一个值，仅在 update 和 componentUpdated 钩子中可用
+ *   - arg： 传给指令的参数。例如 v-my-directiv:foo, arg 的值为 "foo"
+ *  - modifiers: 一个包含修饰符的对象。例如 v-my-directiv.foo.bar ,则其值为 { foo: true, bar: true }
+ * + vnode: Vue 编译生成的虚拟节点
+ * + oldVnode: 上一个虚拟节点，仅在 update 和 componentUpdated 钩子中可用
  */
 Vue.directive('focus',{
     bind: function(el,binding,vnode) {},  //当指令绑定到元素上的时候执行，只执行一次
@@ -99,7 +102,7 @@ new Vue({
     diretives: {
         'fontweight': {
             bind: function(el, binding){...},
-			...
+   ...
         },
         //函数简写,该代码会应用到 bind 和 update 钩子函数中
         'focus': function(el, binding) {...}
@@ -120,13 +123,7 @@ new Vue({
 
 ***在 create 之后 beforeMount 之前，Vue 的模板在内存中编译，在 mounted 之后才会渲染到页面中***
 
-
-
 #### 1.8  axios 实现请求
-
-
-
-
 
 ### 二、 组件
 
@@ -134,7 +131,7 @@ new Vue({
 
 #### 2.1  创建全局组件的方式
 
-1.  使用 Vue.extend 方法创建
+1. 使用 Vue.extend 方法创建
 
 ~~~js
 //创建组件
@@ -151,7 +148,7 @@ Vue.component('myCom',com1)  //arg0: 组件名，arg1: 创建的组件对象。
 </div>
 ```
 
-2.  直接使用 Vue.component 创建
+2. 直接使用 Vue.component 创建
 
 ~~~js
 Vue.component('mycom1',{
@@ -159,7 +156,7 @@ Vue.component('mycom1',{
 })
 ~~~
 
-3.  使用 template 标签创建
+3. 使用 template 标签创建
 
 ~~~html
 <div id="app">
@@ -167,7 +164,7 @@ Vue.component('mycom1',{
 </div>
 
 <template id="temp">
-	<div>
+ <div>
         <h2>这是 template 标签创建的组件</h2>
     </div>
 </template>
@@ -189,8 +186,8 @@ new Vue({
             template: '<h1>只是私有的组件<h1/>'
         }，
         index: {
-        	template: '<div></div>'
-    	}
+         template: '<div></div>'
+     }
     }
 })
 ~~~
@@ -201,10 +198,10 @@ new Vue({
 Vue.component('mycom1',{
     template: '<h3>这是 Vue.component 创建的组件, {{ msg }}</h3>'，
     data: function(){
-    	return {
-        	msg: 'Hello World'
-    	}
-	},
+     return {
+         msg: 'Hello World'
+     }
+ },
     method: {}
 })
 ~~~
@@ -243,7 +240,7 @@ new Vue({
 <div id='app'>
     <!-- 通过 mode 属性，设置切换的模式。-->
     <transition mode='out-in'>
-    	<component :is="comName"></component>
+     <component :is="comName"></component>
     </transition>
 </div>
 ~~~
@@ -272,7 +269,7 @@ new Vue({
 </div>
 ~~~
 
-​	**数据验证**
+​ **数据验证**
 
 ~~~js
 Vue.component('my-component',{
@@ -312,7 +309,7 @@ Vue.component('my-component',{
 </div>
 
 <template id='tmpl'>
-	<div>
+ <div>
         <button @click='myClick'>
             子组件的按钮
         </button>
@@ -374,25 +371,21 @@ new Vue({
             console.log(this.$refs.mybtn)
             console.log(this.$refs.mycom.msg)
             this.$refs.mycom.show()
-		}
+  }
     },
     components: {
-    	com: {
-    		template: '#tmpl',
+     com: {
+      template: '#tmpl',
             data(){
                 return {msg: '...'}
             },
             methods: {
                 show(){}
-        	}
-		}
+         }
+  }
     }
 })
 ~~~
-
-
-
-
 
 ### 三、 Render 函数
 
@@ -402,7 +395,7 @@ new Vue({
 
 ~~~js
 createElement(
-	//{ String | Object | Function }
+ //{ String | Object | Function }
     //一个 HTML 标签，组件组件选项，或一个 return 上述其一的函数
     'div',
     
@@ -443,30 +436,30 @@ createElement(
        
        //和 v-bind:style 一样的API
        style: {
-       	color: 'red',
+        color: 'red',
            fontSize: '14px'
-   	},
+    },
            
        //正常的 HTML 属性
        attr: {
-       	id: 'foo'        
-   	},
+        id: 'foo'        
+    },
            
-   	//组件props
-   	props: {
-   		myProp: 'bar'
-   	},
+    //组件props
+    props: {
+     myProp: 'bar'
+    },
            
        //DOM属性
-   	domProps: {
-   		innerHTML: 'baz'
-   	},
+    domProps: {
+     innerHTML: 'baz'
+    },
        
        //自定义事件监听器 on
        //不支持如 v-on:keyup.enter 的修饰器，需要手动匹配 keyCode
        on: {
-   		click: this.clickHandler
-   	}
+     click: this.clickHandler
+    }
        ...
    }
    ~~~
@@ -479,7 +472,7 @@ createElement(
 
 #### 4.1  webpack 基础配置
 
-1.  安装 webpack 和 webpack-dev-server
+1. 安装 webpack 和 webpack-dev-server
 
 ~~~shell
 npm init
@@ -488,8 +481,6 @@ npm install webpack-dev-server --save-dev
 ~~~
 
 2. 创建 webpack.config.js 配置文件
-
-
 
 ### 五、 路由与 vue-router
 
@@ -598,7 +589,7 @@ let login = {
 </div>
 
 <template id='tmpl'>
-	<div>
+ <div>
         <h1>account组件</h1>
         <router-link to='/login'>登录</router-link>
         <router-link to='/register'>注册</router-link>
@@ -671,19 +662,15 @@ var header = {
 ~~~html
 <div id='app'>
     <!-- 默认视图，即装载 header 组件 -->
-	<router-view></router-view>
+ <router-view></router-view>
     <!-- 容器，实现流式布局 -->
-	<div class="container">
+ <div class="container">
         <!-- 装载 leftBox 组件 -->
-		<router-view name='left'></router-view>
+  <router-view name='left'></router-view>
         <!-- 装载 mainBox 组件 -->
         <router-view name='main'></router-view>
-	</div>
+ </div>
 </div>
 ~~~
-
-
-
-
 
 ### 六、 状态管理与 Vuex

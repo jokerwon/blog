@@ -1,11 +1,13 @@
 ---
 title: JavaScript
+tag: [Frontend, JavaScript]
 ---
 
 
 ## 一、对象
 
 ### 1. 属性的简洁表示法
+<!-- more -->
 
 ~~~javascript
 // 属性简写
@@ -29,6 +31,7 @@ const o = {
 ~~~
 
 ### 2. 属性名表达式
+
 ~~~javascript
 let propKey = 'foo';
 
@@ -40,6 +43,7 @@ let obj = {
 ~~~
 
 ### 3. 属性的可枚举性和遍历
+
 1) 可枚举性
 对象的每个属性都有一个描述对象（Descriptor），用来控制该属性的行为。
 `Object.getOwnPropertyDescriptor`方法可以获取该属性的描述对象。
@@ -56,12 +60,11 @@ Object.getOwnPropertyDescriptor(obj, 'foo')
 ~~~
 
 目前，有四个操作会忽略enumerable为false的属性。
+
 - ``for...in``循环：只遍历对象自身的和继承的可枚举的属性。
 - ``Object.keys()``：返回对象自身的所有可枚举的属性的键名。
 - ``JSON.stringify()``：只串行化对象自身的可枚举的属性。
 - ``Object.assign()``： 忽略``enumerable``为``false``的属性，只拷贝对象自身的可枚举的属性。
-
-
 
 2) 属性的遍历
 
@@ -85,31 +88,16 @@ Object.getOwnPropertyDescriptor(obj, 'foo')
 
 `Reflect.ownKeys`返回一个数组，包含对象自身的所有键名，不管键名是 Symbol 或字符串，也不管是否可枚举。
 
-
-
 ## 二、Symbol
-
-
 
 ## 三、Set和Map
 
-
-
 ## 四、Proxy
-
-
 
 ## 五、Reflect
 
-
-
 ## 六、Promise
-
-
 
 ## 七、Generator
 
-
-
 ## 八、class 关键字
-

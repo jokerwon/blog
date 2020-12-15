@@ -1,10 +1,11 @@
 ---
 title: Linux
+tag: [Linux, Devops]
 ---
 
 *基于Ubuntu 18.04.1 LTS 64位*
 
-
+<!-- more -->
 
 ## 文件目录
 
@@ -21,7 +22,7 @@ Linux 文件和目录的特点：
 - `bin`、`/usr/bin` : 可执行二进制文件的目录，如常用的 `ls`, `tar`, `mv` 等
 
 - `boot` : 放置 Linux 系统启动时用到的一些文件，如 Linux 的内核文件: `/boot/vmlinuz`，系统引导管理器: `/boot/grub`
-- `dev ` : 放置 Linux 系统下的设备文件，访问该目录下某个文件，相当于访问某个设备，常用的是挂载光驱 `$ mount /dev/cdrom  mnt`
+- `dev` : 放置 Linux 系统下的设备文件，访问该目录下某个文件，相当于访问某个设备，常用的是挂载光驱 `$ mount /dev/cdrom  mnt`
 - `etc` : 系统配置文件存放的目录，不建议在此目录下存放可执行文件，重要的配置文件有:
   - `/etc/inittab`
   - `/etc/fstab`
@@ -40,8 +41,6 @@ Linux 文件和目录的特点：
 - `/proc` : 此目录的数据都在内存中，如系统核心、外部设备、网络状态，由于数据都存放于内存中，所以不占用磁盘空间，比较重要的文件有 `/proc/cpuinfo`, `/proc/interrupts`, `/proc/dma`, `/proc/ioports`, `/proc/net/*`
 - `/root` : 系统管理员 `root` 的家目录
 
-
-
 ## 本地命令
 
 ### 终端命令的格式
@@ -53,8 +52,6 @@ Linux 文件和目录的特点：
 - `command` : 命令名
 - `option` : 选项，可选
 - `parameter` : 参数，可选， 可以是零个、一个或者多个
-
-
 
 ### 常用操作
 
@@ -84,19 +81,19 @@ Linux 文件和目录的特点：
 
 功能说明：删除文件或目录。
 语　　法：rm \[-dfirv]\[--help]\[--version] [文件或目录...]
-补充说明：执行rm指令可删除文件或目录，如欲删除目录必须加上参数”-r”，否则预设仅会删除文件。 
+补充说明：执行rm指令可删除文件或目录，如欲删除目录必须加上参数”-r”，否则预设仅会删除文件。
 参　　数：
-　-d或–directory 　直接把欲删除的目录的硬连接数据删成0，删除该目录。 
-　-f或–force 　强制删除文件或目录。 
-　-i或–interactive 　删除既有文件或目录之前先询问用户。 
-　-r或-R或–recursive 　递归处理，将指定目录下的所有文件及子目录一并处理。 
-　-v或–verbose 　显示指令执行过程。 
+　-d或–directory 　直接把欲删除的目录的硬连接数据删成0，删除该目录。
+　-f或–force 　强制删除文件或目录。
+　-i或–interactive 　删除既有文件或目录之前先询问用户。
+　-r或-R或–recursive 　递归处理，将指定目录下的所有文件及子目录一并处理。
+　-v或–verbose 　显示指令执行过程。
 
 `rm  -rf  /log/access`  删除 /log/access目录以及其下所有文件和子文件目录
 
 #### **mkdir(make directories)**
 
-功能说明：建立目录 
+功能说明：建立目录
 语　　法：mkdir \[-p]\[--help]\[--version]\[-m <目录属性>] [目录名称]
 补充说明：mkdir可建立目录并同时设置目录的权限。
 参　　数：
@@ -107,15 +104,15 @@ Linux 文件和目录的特点：
 #### **touch**
 
 功能说明：创建/改变文件或目录时间。
-语　　法：touch \[-acfm]\[-d <日期时间>]\[-r <参考文件或目 录>][-t <日期时间>] [--help]　　 \[--version][文件或目录...] 或 touch \[-acfm]\[--help]\[--version]\[日期时 间][文件或目录...] 
+语　　法：touch \[-acfm]\[-d <日期时间>]\[-r <参考文件或目 录>][-t <日期时间>] [--help]　　 \[--version][文件或目录...] 或 touch \[-acfm]\[--help]\[--version]\[日期时 间][文件或目录...]
 补充说明：使用touch指令可更改文件或目录的日期时间，包括存取时间和更改时间。
 参　　数：
-　-a或–time=atime或–time=access或–time=use 　只更改存取时间。 
-　-c或–no-create 　不建立任何文件。 
-　-d<时间日期> 　使用指定的日期时间，而非现在的时间。 
-　-f 　此参数将忽略不予处理，仅负责解决BSD版本touch指令的兼容性问题。 
-　-m或–time=mtime或–time=modify 　只更改变动时间。 
-　-r<参考文件或目录> 　把指定文件或目录的日期时间，统统设成和参考文件或目录的日期时间相同。 
+　-a或–time=atime或–time=access或–time=use 　只更改存取时间。
+　-c或–no-create 　不建立任何文件。
+　-d<时间日期> 　使用指定的日期时间，而非现在的时间。
+　-f 　此参数将忽略不予处理，仅负责解决BSD版本touch指令的兼容性问题。
+　-m或–time=mtime或–time=modify 　只更改变动时间。
+　-r<参考文件或目录> 　把指定文件或目录的日期时间，统统设成和参考文件或目录的日期时间相同。
 　-t<日期时间> 　使用指定的日期时间，而非现在的时间。
 `touch test.txt` （注：Linux下没有文件后缀名区分文件类型之说，系统文件类型只有可执行文件和不可执行文件）
 
@@ -194,14 +191,10 @@ eg. `ls -lh | more`
 
 ​      `ls -lh | grep key`
 
-
-
 #### **管理进程**
 
 ps -ef | grep ***         查看进程信息
 kill -9 PID                      强制停止指定进程号的进程
-
-
 
 ## 远程管理
 
@@ -242,8 +235,6 @@ ifconfig | grep inet
 
 测试网络连接
 
-
-
 ### * ssh
 
 ~~~sh
@@ -257,8 +248,6 @@ ssh [-p port] user@remote
 提示
 
 - 使用 `exit` 退出当前用户的登录
-
-
 
 ### scp (secure copy)
 
@@ -275,8 +264,6 @@ scp -P 22 test.js user@remote:Desktop/test.js
 # 把远程家目录下的 test.js 文件复制到本地当前目录下的 test.js
 scp user@remote:Desktop/test.js test.js
 ```
-
-
 
 ## 用户权限
 
@@ -346,4 +333,3 @@ chmod +/-rwx 文件/目录
 | `useradd -m [-g <group_name>] <username>` | 添加新用户   | - `-m` 自动建立用户家目录<br />- `-g` 指定用户组，否则会建立一个和用户名相同的组 |
 | `passwd <password>`                       | 设置用户密码 | 如果是普通用户，用该命令可以修改自己的密码                   |
 |                                           |              |                                                              |
-

@@ -1,11 +1,13 @@
 ---
 title: React
+tag: [Frontend, JavaScript, React]
 ---
-
 注意：
 
 1. render函数return前不能使用 setState()，会造成死循环。
 2. 构造函数是唯一可以给 this.state 赋值的地方。
+
+<!-- more -->
 
 + State 的更新可能是异步的
 
@@ -22,7 +24,4 @@ this.setState((state, props) => ({
 }));
 ~~~
 
-
-
 + State 的更新会被合并
-

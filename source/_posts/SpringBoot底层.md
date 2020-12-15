@@ -1,7 +1,11 @@
 ---
 title: Spring Boot 底层
+tag: [Backend, Java, Spring, Spring Boot]
 ---
 
+**Spring Boot 底层源码分析**
+
+<!-- more -->
 ### 一、 POM 文件
 
 * 父项目
@@ -9,9 +13,9 @@ title: Spring Boot 底层
 ~~~xml
 <!-- 父项目 -->
 <parent>
-	<groupId>org.springframework.boot</groupId>
+ <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-	<version>2.1.3.RELEASE</version>
+ <version>2.1.3.RELEASE</version>
 </parent>
 ~~~
 
@@ -19,10 +23,10 @@ title: Spring Boot 底层
 
 ~~~xml
 <parent>
-	<groupId>org.springframework.boot</groupId>
-	<artifactId>spring-boot-dependencies</artifactId>
-	<version>2.1.3.RELEASE</version>
-	<relativePath>../../spring-boot-dependencies</relativePath>
+ <groupId>org.springframework.boot</groupId>
+ <artifactId>spring-boot-dependencies</artifactId>
+ <version>2.1.3.RELEASE</version>
+ <relativePath>../../spring-boot-dependencies</relativePath>
 </parent>
 ~~~
 
@@ -30,12 +34,8 @@ title: Spring Boot 底层
 
 子项目如需要dependencies中的依赖不再需要写版本。
 
-
-
 - spring-boot-starter：spring boot 的场景启动器
 - spring-boot-starter-web： 导入了 web 模块正常运行所依赖的组件
-
-
 
 ### 二、 主程序类
 
@@ -48,7 +48,7 @@ public class DemoDatabaseApplication {
 }
 ~~~
 
-@SpringBootApplication：说明这个类是Spring Boot是主配置类。 
+@SpringBootApplication：说明这个类是Spring Boot是主配置类。
 
 ~~~java
 @Target({ElementType.TYPE})
@@ -79,15 +79,13 @@ public @interface SpringBootApplication {...}
 public @interface EnableAutoConfiguration {...}
 ```
 
-​	**@AutoConfigurationPackage**: 自动配置包
+​ **@AutoConfigurationPackage**: 自动配置包
 
-​		@**Import**({Registrar.class})：Spring底层注解，给容器导入一个组件。==将主配置类（@SpringBootApplication标注的类）所在的包及所有子包中所有的组件扫描到 Spring 容器。==
+​  @**Import**({Registrar.class})：Spring底层注解，给容器导入一个组件。==将主配置类（@SpringBootApplication标注的类）所在的包及所有子包中所有的组件扫描到 Spring 容器。==
 
-​	**@Import({AutoConfigurationImportSelector.class})** ：
+​ **@Import({AutoConfigurationImportSelector.class})** ：
 
-​		AutoConfigurationImportSelector： 组件选择器。将所有需要导入的组件以全类名的方式返回。这些组件就会被添加到容器中。最终会在容器中导入非常多的自动配置类（xxxAutoConfiguration）: 给容器中导入这个场景需要的所有组件，并配置好这些组件。
-
-
+​  AutoConfigurationImportSelector： 组件选择器。将所有需要导入的组件以全类名的方式返回。这些组件就会被添加到容器中。最终会在容器中导入非常多的自动配置类（xxxAutoConfiguration）: 给容器中导入这个场景需要的所有组件，并配置好这些组件。
 
 ### 三、 配置文件
 
@@ -102,7 +100,7 @@ public @interface EnableAutoConfiguration {...}
 
 ```yaml
 server:
-	port: 8081
+ port: 8081
 ```
 
 ##### 3.1.2  值的写法
@@ -121,11 +119,11 @@ server:
 
 ```yaml
 friends:
-	name: tom
-	age: 22
+ name: tom
+ age: 22
 ```
 
-​	行内写法：
+​ 行内写法：
 
 ```yaml
 friend: { name: tom, age: 22 }
@@ -135,12 +133,12 @@ friend: { name: tom, age: 22 }
 
 ```yaml
 pets: 
-	- cat
-	- dog
-	- pig
+ - cat
+ - dog
+ - pig
 ```
 
-​	行内写法：
+​ 行内写法：
 
 ```yaml
 pets: [ cat, dog, pig ]
@@ -155,7 +153,7 @@ bean：
 ```java
 /*
  * @ConfigurationProperties： 告诉SpringBoot将本类中的所有属性和全局配置文件相关的配置进行绑定。
- *		prefix = "person"： 指定配置文件中要映射的属性 
+ *  prefix = "person"： 指定配置文件中要映射的属性 
  */
 @Component
 @ConfigurationProperties(prefix = "person")
@@ -178,14 +176,14 @@ yaml：
 
 ```yaml
 person: 
-	name: joe
-	age: 22
-	map: { k1: v1, k2: v2 }
-	list: 
-		- item1
-		- item2
-	dog: 
-		name: jacky
+ name: joe
+ age: 22
+ map: { k1: v1, k2: v2 }
+ list: 
+  - item1
+  - item2
+ dog: 
+  name: jacky
 ```
 
 #### 3.2  properties( application.properties) 配置文件
@@ -219,7 +217,7 @@ person.dog.name=jacky
 
 - **@PropertySource**： 加载指定的配置文件
 
-​	eg.  @PropertySource(value = {"classpath:person.properties"})
+​ eg.  @PropertySource(value = {"classpath:person.properties"})
 
 - **@ImportResource**： 导入 Spring 配置文件，让配置文件里的内容生效。
 
@@ -227,10 +225,10 @@ person.dog.name=jacky
 
 #### 3.5  向容器中添加组件
 
-​	Spring Boot 推荐使用全注解的方式来给容器添加组件。
+​ Spring Boot 推荐使用全注解的方式来给容器添加组件。
 
- 	1. 新建配置类
- 	2. 使用 @Bean
+  1. 新建配置类
+  2. 使用 @Bean
 
 ~~~java
 @Configuration
@@ -241,4 +239,3 @@ public class MyAppConfig{
     }
 }
 ~~~
-

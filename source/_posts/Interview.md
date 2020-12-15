@@ -2,6 +2,12 @@
 title: Interview
 ---
 
+## 前言
+
+收集前端方面高频面试题。
+
+<!-- more -->
+
 ## HTML 和 CSS
 
 ### 1. HTML
@@ -11,8 +17,6 @@ title: Interview
 #### 多媒体
 
 #### SEO
-
-
 
 ### 2. CSS
 
@@ -146,8 +150,6 @@ title: Interview
 }
 ~~~
 
-
-
 #### 盒子模型
 
 ##### 标准盒模型（content-box）
@@ -159,8 +161,6 @@ title: Interview
 盒子大小 = (content + padding + border)(width) + margin
 
 ##### Flex 盒模型
-
-
 
 #### BFC
 
@@ -175,8 +175,6 @@ title: Interview
   1. 同一个 BFC 下外边距会发生折叠。
   2. BFC 可以包含浮动元素。（应用场景：清除浮动）
   3. BFC 可以阻止元素被浮动元素覆盖。
-
-
 
 #### Flex
 
@@ -253,8 +251,6 @@ title: Interview
 - align-self
 
   `align-self`属性允许单个项目有与其他项目不一样的对齐方式，可覆盖`align-items`属性。默认值为`auto`，表示继承父元素的`align-items`属性，如果没有父元素，则等同于`stretch`。
-
-
 
 #### Grid
 
@@ -496,8 +492,6 @@ title: Interview
   place-self: <align-self> <justify-self>;
   ```
 
-
-
 #### 响应式布局
 
 ##### 1. @media
@@ -508,12 +502,6 @@ title: Interview
 
 ##### 4. vh/vw
 
-
-
-
-
-
-
 ## JavaScript
 
 ### 1. 闭包
@@ -523,8 +511,6 @@ title: Interview
 在定时器、事件监听、ajax 请求等任务中，只要使用了回调函数，实际上就是在使用闭包。
 
 闭包一般被用来封装私有变量，例如 IIFE 中就利用了闭包来进行封装。
-
-
 
 ### 2. 作用域
 
@@ -544,11 +530,9 @@ title: Interview
 
 #### 块级作用域
 
-在 ES6 之前，大概只有 `with` 和` try...catch...` 的 `catch`分支中存在块级作用域。ES6 新增了 `let`  和 `const` 关键字，从而方便地实现了块级作用域。
+在 ES6 之前，大概只有 `with` 和`try...catch...` 的 `catch`分支中存在块级作用域。ES6 新增了 `let`  和 `const` 关键字，从而方便地实现了块级作用域。
 
 在有 `let` 或 `const` 声明的块级作用域中，会产生一个暂时性死区，就是说由 `let` 声明的变量，在声明之前都是无法使用的，这意味着 `let` 和 `const` 不存在变量提升，由其声明的变量也无法重复声明。
-
-
 
 ### 3. 原型
 
@@ -559,8 +543,6 @@ title: Interview
 #### 原型链
 
 如果让原型对象指向另一个类型的实例，那么原型对象中将包含一个指向另一个原型的指针（`[[prototype]]`），加入另一个原型也是其他某一个类型的实例，那么上述关系依然成立，如此层层递进，就构成了原型链。
-
-
 
 ### 4. 创建对象的方法
 
@@ -655,8 +637,8 @@ function Person(name, age, job) {
   this.friends = ["Tim", "Cat"];
   if(typeof this.sayName != "function") {
     Person.prototype.sayName = function() {
-  		console.log(this.name);
-		};
+    console.log(this.name);
+  };
   }
 }
 let person1 = new Person("Sam", 22, "FE");
@@ -703,8 +685,6 @@ function Person(name, age, job) {
 
 1. 新创建对象的实例方法不引用 `this`。
 2. 不适用 `new` 操作符调用构造函数。
-
-
 
 ### 5. 继承
 
@@ -809,16 +789,12 @@ Sub.prototype.sayName = function() {
 };
 ~~~
 
-
-
 ### 6. new
 
 1. 创建一个空的简单JavaScript对象（即`{}`）；
 2. 链接该对象（即设置该对象的构造函数）到另一个对象（构造器的原型对象） ；
 3. 将步骤1新创建的对象作为`this`的上下文 ；
 4. 如果该函数没有返回对象，则返回`this`。
-
-
 
 ### 7. this
 
@@ -896,26 +872,16 @@ doFoo(obj.foo);  // ops, gloabal
 
 间接引用时，调用函数会应用默认绑定。
 
-
-
 ### 8. 事件循环
-
-
 
 ### 9. 垃圾回收
 
 - **标记清除**
 - **引用计数**
 
-
-
 ### 10. DOM 和 BOM
 
-
-
 ### 11. 模块化
-
-
 
 ### 12. 跨域
 
@@ -937,14 +903,6 @@ doFoo(obj.foo);  // ops, gloabal
 
 #### 12.9 websocket
 
-
-
 ### 13. 客户端存储
-
-
-
-
-
-
 
 ## HTTP

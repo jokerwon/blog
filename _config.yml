@@ -6,14 +6,14 @@
 title: Joker Won's blogs
 subtitle: 翁建凯的博客
 description: 翁建凯的个人博客
-keywords: blog 博客 前端
+# keywords: blog 博客 前端
 author: Joker Won
 language: zh-CN
 timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://example.com/child' and root as '/child/'
-# url: http://example.com
+url: http://jokerwon.github.io
 # root: /
 # permalink: :year/:month/:day/:title/
 # permalink_defaults:
@@ -98,7 +98,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next
+theme: melody
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
