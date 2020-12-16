@@ -20,7 +20,7 @@ menu:
   Home: /
   Archives: /archives
   Tags: /tags
-  Categories: /categories
+  # Categories: /categories
   #XXX: /xxx
 
 # Favicon
@@ -128,9 +128,9 @@ cdn:
 
 # Post info settings
 # ---------------
-avatar:
+avatar: https://gitee.com/jokerwon/images/raw/master/img/20201216092308.jpeg
 
-top_img: true # false or url of img
+top_img: https://gitee.com/jokerwon/images/raw/master/img/20201216090137.jpg # true or false or url of img
 
 top_img_height: 60 # best range: 60 - 100
 
@@ -292,8 +292,9 @@ canvas_ribbon:
 
 # Sidebar Settings
 # ---------------
-# links_title: Links
-# links:
+links_title: Links
+links:
+  Github: https://github.com/jokerwon
 # Name: url
 
 # Follow Me Button
