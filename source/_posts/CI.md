@@ -3,10 +3,11 @@ title: CI/CD
 tag: [Devops, Jenkins, CI/CD]
 ---
 
-## 前置
+## 前言
 
-- Linux
-- Jenkins
+CI/CD 是一种通过在应用开发阶段引入自动化来频繁向客户交付应用的方法。CI/CD 的核心概念是持续集成、持续交付和持续部署。CI/CD 可让持续自动化和持续监控贯穿于应用的整个生命周期（从集成和测试阶段，到交付和部署）。这些关联的事务通常被统称为“CI/CD 管道”，由开发和运维团队以敏捷方式协同支持。
+
+<!-- more -->
 
 ## Jenkins
 
@@ -14,8 +15,6 @@ tag: [Devops, Jenkins, CI/CD]
 
 - Jenkins 是一款使用 Java 语言开发的开源的自动化服务器。我们通过界面或 Jenkinsfile 告诉它执行什么任务，何时执行。理论上，我们可以让它执行任何任务，但是通常只应用于持续集成和持续交付。
 - Jenkins 通常作为一个独立的应用程序在其自己的流程中运行， 内置 Java servlet 容器/应用程序服务器（[Jetty](http://www.eclipse.org/jetty/)）。
-
-<!-- more -->
 
 ### 安装部署
 
@@ -83,11 +82,15 @@ tag: [Devops, Jenkins, CI/CD]
 
 #### 设置向导
 
-*部分引导基于 ubuntu 安装流程*
+*部分引导基于 ubuntu 18.04.1 LTS 64位*
 
 1. 安装运行后访问 <http://localhost:8080> ，等待 **解锁 Jenkins** 的页面出现。(未改变运行默认端口的前提下)
 
+   ![Getting Start](https://gitee.com/jokerwon/images/raw/master/img/20201216093734.jpg)
+
 2. 从 Jenkins 控制台日志输出中，寻找并复制自动生成的默认密码。
+
+   ![Default Password](https://gitee.com/jokerwon/images/raw/master/img/20201216095410.png)
 
    > - 此次安装的默认日志路径为 `/var/log/jenkins/jenkins.log` ，如果日志遗失，可以从 `/var/lib/jenkins/secrets/initialAdminPassword` 获取初始密码
    > - 必须在新Jenkins安装中的安装向导中输入此密码才能访问Jenkins的主UI。 如果您在设置向导中跳过了后续的用户创建步骤， 则此密码还可用作默认admininstrator帐户的密码（使用用户名“admin”）
@@ -96,7 +99,7 @@ tag: [Devops, Jenkins, CI/CD]
 
 ### 安装时问题
 
-1. 启动 Jenkins 时遇到 ERROR: No Java executable found in current PATH: /bin:/usr/bin:/sbin:/usr/sbin的问题
+1. ##### 启动 Jenkins 时遇到 ERROR: No Java executable found in current PATH: /bin:/usr/bin:/sbin:/usr/sbin的问题
 
    检查环境变量，执行 `echo $PATH` ，查看是否含存在 jdk；
 
@@ -113,19 +116,41 @@ tag: [Devops, Jenkins, CI/CD]
 
    重新启动服务。
 
-2. 下载插件太慢
+2. ##### 下载插件太慢
 
-   修改下载源。
+   1）进入 **系统管理 => 插件管理 => 高级** ，修改选项 **升级站点(Update Site)** 为国内镜像，此处推荐 `https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json` 。
 
-3. Jenkins 系统权限问题
+   但是我们打开该文件，发现文件中的更新地址仍然是官网的更新地址，所以此处修改配置只能在获取插件更新地址文件时加速。
 
-   1) 为 Jenkins 用户添加相应文件的权限
+   ![UpdateCenterJSON](https://gitee.com/jokerwon/images/raw/master/img/20201216101356.png)
+
+   2）由于 Jenkins 常常不会去更新该文件，我们可以**将 `update-center.json` 文件中的更新地址替换为国内镜像源** ，即使用 `sed` 命令手动替换文件内容，将 `updates.jenkins-ci.org(旧)` 或 `updates.jenkins.io(新)` 替换为 `mirrors.tuna.tsinghua.edu.cn`，`www.google.com` 替换为 `www.baidu.com` 。需要注意的是，默认的官方更新地址可能由于版本不同而改变，所以你应该检查文件中的地址来确认应该修改的地址内容。此处推荐典型的两种替换方法。
+
+   ~~~sh
+   # 进入Jenkins工作目录
+   cd /var/lib/jenkins/updates
+   
+   # 备份
+   cp default.json default.json.bak
+   
+   # 替换URL
+   # 老版本
+   sed -i 's#http://updates.jenkins-ci.org/download#https://mirrors.tuna.tsinghua.edu.cn/jenkins#g' default.json && sed -i 's#http://www.google.com#https://www.baidu.com#g' default.json
+   # 新版本
+   sed -i 's#https://updates.jenkins.io/download#https://mirrors.tuna.tsinghua.edu.cn/jenkins#g' default.json && sed -i 's#http://www.google.com#https://www.baidu.com#g' default.json
+   ~~~
+
+   3）重启 Jenkins。
+
+3. ##### Jenkins 系统权限问题
+
+   1） 为 Jenkins 用户添加相应文件的权限。
 
    ~~~sh
    chown -R jenkins <path>
    ~~~
 
-   2) 暴力点，修改 Jenkins 以 root 用户执行
+   2）暴力点，使 Jenkins 以 root 用户执行。
 
    ~~~sh
    # 打开配置文件
@@ -138,21 +163,13 @@ tag: [Devops, Jenkins, CI/CD]
    JENKINS_GROUP=root
    ~~~
 
+   3）重启 Jenkins 服务。
+
 ### Pipeline
 
 #### 概念
 
 Jenkins 流水线 (或简单的带有大写 "P" 的 "Pipeline" ) 是一套插件，它支持实现和集成 *continuous delivery pipelines* 到 Jenkins。
-
-#### 意义
-
-- **更好的自动化** : 自动地为所有分支创建流水线构建过程并拉取请求。
-
-- **更好地版本化** : 将 pipeline 提交到软件版本库中进行版本控制。（通过 Jenkinsfile）
-- **更好地协作** : pipeline的每次修改对所有人都是可见的。除此之外，还可以对pipeline进行代码审查。
-- **更好的重用性** : 手动操作没法重用，但是代码可以重用。
-
-#### Hello World
 
 ~~~groovy
 pipeline {
@@ -167,7 +184,16 @@ pipeline {
 }
 ~~~
 
-#### pipeline 语法
+
+
+#### 意义
+
+- **更好的自动化** : 自动地为所有分支创建流水线构建过程并拉取请求。
+- **更好地版本化** : 将 pipeline 提交到软件版本库中进行版本控制。（通过 Jenkinsfile）
+- **更好地协作** : pipeline的每次修改对所有人都是可见的。除此之外，还可以对pipeline进行代码审查。
+- **更好的重用性** : 手动操作没法重用，但是代码可以重用。
+
+#### 语法
 
 Jenkins pipeline其实就是基于Groovy语言实现的一种DSL（领域特定语言），用于描述整条流水线是如何进行的。流水线的内容包括执行编译、打包、测试、输出测试报告等步骤。
 
@@ -363,11 +389,11 @@ pipeline {
 
 在 `script` 块中的其实就是 Groovy 代码。大多数时候，我们是不需要使用 `script` 步骤的。如果在 `script` 步骤中写了大量的逻辑，则说明你应该把这些逻辑拆分到不同的阶段，或者放到**共享库**中。
 
-#### 环境变量
+### 环境变量
 
 环境变量可以被看作是pipeline与Jenkins交互的媒介。可分为 Jenkins 内置变量和自定义变量。
 
-##### Jenkins 内置变量
+#### Jenkins 内置变量
 
 Jenkins 通过 `env` 的全局变量，将 Jenkins 内置环境变量暴露出来。
 
@@ -393,7 +419,7 @@ pipeline {
 - `BUILD_URL` : 当前构建的页面 URL。如果构建失败，则需要将失败的构建链接放在邮件通知中，这个链接就可以是 BUILD_URL。
 - `GIT_BRANCH` : 通过 git 拉取的源码构建的项目才会有此变量。
 
-##### 自定义 pipeline 环境变量
+#### 自定义 pipeline 环境变量
 
 声明式 pipeline 提供了 `environment` 指令，方便自定义变量。
 
@@ -422,9 +448,110 @@ pipeline {
 
 如果在 `environment` 中定义的变量与 `env` 中的变量重名，那么被重名的变量的值会被覆盖掉。
 
-##### 自定义全局变量
+#### 自定义全局变量
 
 Jenkins 2.269 版本中，可以在 **系统管理 => 系统配置 => 全局属性** 中添加。使用时无需前缀，直接引用。
+
+### 触发器
+
+#### 触发条件
+
+基于前面的知识，每当我们推送代码后，需要到 Jenkins 系统中手动触发构建。显然，这不够自动化。自动化是指 pipeline 按照一定的规则自动执行。而这些规则被称为 pipeline 触发条件。
+
+分析目前常用的触发器，大概可以分为两类：**时间触发** 和 **事件触发** 。
+
+***下文基于 pipeline 语法来展开介绍触发器，但依然可以在 配置=>构建触发器 选项中创建触发器***
+
+#### 时间触发
+
+时间触发是指定义一个时刻，每到这个时刻就会触发 pipeline 执行。在 Jenkins pipeline 中使用 `trigger` 指令来定义时间触发。`tigger` 指令只能被定义在 `pipeline` 块内，Jenkins 内置支持 cron、pollSCM，upstream 三种方式。其他方式可以通过插件来实现。
+
+#####  定时执行 cron
+
+~~~groovy
+pipleline {
+  agent any
+  triggers {
+    cron('0 0 * * *')
+  }
+  stages {
+    stage('Nightly build') {
+      steps {
+        echo '这是一个耗时的构建，每天凌晨构建'
+      }
+    }
+  }
+}
+~~~
+
+Jenkins trigger cron 语法采用的是UNIX cron语法（有些细微的区别）。一条 cron 包含 5 个字段，使用空格或 Tab 分隔，格式为：MINUTE HOUR DOM MONTH DOW(星期几)。也可以使用正则。
+
+##### 轮询代码仓库：pollSCM
+
+这种方式比较耗用资源，在一些特殊情况下，比如外网的代码仓库无法调用内网的 Jenkins，或者反过来，才会采用这种方式。
+
+~~~groovy
+pipeline {
+  agent any
+  triggers {
+    // 每分钟判断一次代码是否有变化
+    pollSCM('H/1 * * * *')
+  }
+}
+~~~
+
+#### 事件触发
+
+事件触发就是发生了某个事件就触发 pipeline 执行。这个事件可以是你能想到的任何事件。比如手动在界面上触发、其他 job 主动触发、HTTP API Webhook 触发等。
+
+##### 由上游任务触发：upstream
+
+当 B 任务的执行依赖 A 任务的执行结果时，A 就被称为 B 的上游任务。在 Jenkins2.22 及以上版本中，`trigger` 指令开始支持 upstream类型的触发条件。upstream 的作用就是能让 B pipeline自行决定依赖哪些上游任务。
+
+~~~groovy
+// job1, job2 为任务名
+triggers {
+  upstream(upstreamProjects: 'job1,job2', threshold: hudson.model.Result.SUCCESS)
+}
+~~~
+
+当upstreamProjects参数接收多个任务时，使用，分隔。threshold参数是指上游任务的执行结果是什么值时触发。
+
+##### *WebHook 触发
+
+当代码仓库的某些事件（如Push、Merge等）被触发时，仓库主动去触发 Jenkins 执行构建。
+
+![webhook](https://gitee.com/jokerwon/images/raw/master/img/20201216151639.png)
+
+下面以 GitLab 为例。
+
+*假设已存在 Gitlab项目*
+
+1. 为 Jenkins 安装 GitLab 插件。
+
+2. 创建全局凭证。
+
+   1）进入 **系统管理 => Manage Credentials => 添加凭据** 。
+
+   2）添加 ssh 凭证。
+
+   ![create Credentials](https://gitee.com/jokerwon/images/raw/master/img/20201216152732.png)
+
+3. 创建单分支 pipeline 项目。
+
+4. 配置触发器。
+
+   ![trigger](https://gitee.com/jokerwon/images/raw/master/img/20201216154442.png)
+
+5. 进入 Gitlab 的项目，进入 **Setting => Integrations**，添加 Hook。
+
+   ![gitlabSetting](https://gitee.com/jokerwon/images/raw/master/img/20201216154553.png)
+
+6. 添加 Hook 后，可以点击 Test 按钮测试相关事件。
+
+
+
+
 
 ### 权限
 
