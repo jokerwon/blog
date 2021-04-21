@@ -196,6 +196,25 @@ eg. `ls -lh | more`
 ps -ef | grep ***         查看进程信息
 kill -9 PID                      强制停止指定进程号的进程
 
+#### df(disk free)
+
+显示目前在 Linux 系统上的文件系统磁盘使用情况统计。
+
+- `-a` : 全部文件系统列表
+
+- `-h` , `--human-readable` : 使用人类可读的格式
+- `-H` : 等于 `-h` ，但是计算式，1K=1000，而不是1K=1024
+
+#### du(disk usage)
+
+用于显示目录或文件的大小。
+
+- `-s` , `--summarize` : 仅显示总计
+- `-h` , `--human-readable` : 使用人类可读的格式
+- `-H` : 等于 `-h` ，但是计算式，1K=1000，而不是1K=1024
+
+
+
 ## 远程管理
 
 ### shutdown
@@ -234,6 +253,8 @@ ifconfig | grep inet
 ### ping
 
 测试网络连接
+
+mac 下可以使用 `nc`
 
 ### * ssh
 
