@@ -492,8 +492,8 @@ index:
 # Post Page
 #---------------------------
 post:
-  banner_img: /img/default.png
-  banner_img_height: 70
+  banner_img: /images/banner.jpg
+  banner_img_height: 30
   banner_mask_alpha: 0.3
 
   # 文章在首页的默认封面图，当没有指定 index_img 时会使用该图片，若两者都为空则不显示任何图片
@@ -766,7 +766,7 @@ twikoo:
 # Archive Page
 #---------------------------
 archive:
-  banner_img: /img/default.png
+  banner_img: /images/banner.jpg
   banner_img_height: 60
   banner_mask_alpha: 0.3
   subtitle:
@@ -778,7 +778,7 @@ archive:
 #---------------------------
 category:
   enable: true
-  banner_img: /img/default.png
+  banner_img: /images/banner.jpg
   banner_img_height: 60
   banner_mask_alpha: 0.3
   subtitle:
@@ -808,7 +808,7 @@ category:
 #---------------------------
 tag:
   enable: true
-  banner_img: /img/default.png
+  banner_img: /images/banner.jpg
   banner_img_height: 80
   banner_mask_alpha: 0.3
   subtitle:
@@ -826,7 +826,7 @@ tag:
 #---------------------------
 about:
   enable: true
-  banner_img: /img/default.png
+  banner_img: /images/banner.jpg
   banner_img_height: 60
   banner_mask_alpha: 0.3
   subtitle:
@@ -847,7 +847,7 @@ about:
 # Custom Page through `hexo new page`
 #---------------------------
 page:
-  banner_img: /img/default.png
+  banner_img: /images/banner.jpg
   banner_img_height: 60
   banner_mask_alpha: 0.3
 
@@ -858,7 +858,7 @@ page:
 #---------------------------
 page404:
   enable: true
-  banner_img: /img/default.png
+  banner_img: /images/banner.jpg
   banner_img_height: 85
   banner_mask_alpha: 0.3
   subtitle: "Page not found"
@@ -870,7 +870,7 @@ page404:
 #---------------------------
 links:
   enable: true
-  banner_img: /img/default.png
+  banner_img: /images/banner.jpg
   banner_img_height: 60
   banner_mask_alpha: 0.3
   subtitle:

@@ -4,4 +4,4 @@ date: 2020-02-23 19:20:33
 layout: about
 ---
 
-## Hello, JokerWon
+## Be a frontender in the afterlife
