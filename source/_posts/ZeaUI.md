@@ -13,6 +13,8 @@ npm install --save styled-components
 yarn add styled-components
 ~~~
 
+<!-- more -->
+
 ### 开始
 
 #### 编写第一个组件

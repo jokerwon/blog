@@ -2,6 +2,7 @@
 title: Hygen
 ---
 
+<!-- more -->
 
 [TOC]
 

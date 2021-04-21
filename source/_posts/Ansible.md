@@ -3,6 +3,8 @@ title: Ansible
 tag: [DevOps]
 ---
 
+<!-- more -->
+
 ## 安装
 
 *以Mac OS X 11.0.1为例*
